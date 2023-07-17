@@ -17,7 +17,19 @@ html {
 body {
   color: #545149;
   background-color: #f4f1ec;
+  font-family: Source Sans 3, sans-serif;
   font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+nav {
+  color: #545149;
+  background-color: #f4f1ec;
+  font-family: Bungee, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
 }
 
 /*
