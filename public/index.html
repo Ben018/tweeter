@@ -58,8 +58,19 @@
   
   <!-- Page-specific (main) content here -->
   <main class="container">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem autem facere, facilis eos voluptates maxime debitis itaque reprehenderit magni fugiat distinctio tenetur odit quis obcaecati? Quos ducimus cupiditate illo? Alias?
+    <section class="new-tweet">
+      <h2>Compose Tweet</h2>
+      <form action="/tweets" method="POST">
+        <label for="tweet-text">What are you humming about?</label>
+        <textarea name="text" id="tweet-text"></textarea>
+        <div>
+          <button type="submit">Tweet</button>
+          <output name="counter" class="counter" for="tweet-text">140</output>
+        </div>
+      </form>
+    </section>
   </main>
-
-</body>
-</html>
+  
+  </body>
+  
+  </html>
