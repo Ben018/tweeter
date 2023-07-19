@@ -1,27 +1,38 @@
 article {
-  margin-top: 50px;
+  margin: 50px 0px;
   border: solid;
+  padding: 20px;
 }
 
+/* header */
 article .tweet-header {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  margin-left: 20px;
-  margin-right: 20px;
-  border-bottom: solid;
 }
 
+article .tweet-header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* body */
+article p {
+  border-bottom: solid;
+  padding-bottom: 20px;
+}
+
+/* footer */
 article .tweet-footer {
   display: flex;
-  justify-content: right;
-  margin: 20px;
+  justify-content: space-between;
 }
 
+/* box shadow for post */
 .article-hover {
-box-shadow: 5px 5px 5px #4056A1;
+  box-shadow: 5px 5px 5px #4056A1;
 }
 
+/* highlight icons */
 .icons-hover {
-color: orange;
+  color: orange;
 }
