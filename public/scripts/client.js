@@ -60,7 +60,13 @@ const createTweetElement = tweetData => {
   return html
 };
 
-// add tweets to page
+// add one tweet to page
+const renderTweetsPostOne = (tweetData) => {
+    const tweet = createTweetElement(tweetData)
+    $("main").append(tweet)
+};
+
+// add many tweets to page
 const renderTweets = (tweetDataArray) => {
   for (const tweetData of tweetDataArray) {
     const tweet = createTweetElement(tweetData)
@@ -71,4 +77,21 @@ const renderTweets = (tweetDataArray) => {
 // waits for document to fully load before running
 $(document).ready(() => {
   renderTweets(tweetData)
+
+  // prevents normal form submit
+  $("form").on("submit", event => {
+    event.preventDefault()
+
+    // use ajax to prevent page refresh
+    const serializedString = $(event.currentTarget).serialize();
+
+    $.ajax({
+      method: "POST",
+      url: "http://localhost:8080/tweets",
+      data: serializedString
+    }).then(res => {
+      createTweetElement(res)
+    })
+  })
+
 });
