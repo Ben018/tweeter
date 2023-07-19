@@ -1,0 +1,27 @@
+article {
+  margin-top: 50px;
+  border: solid;
+}
+
+article .tweet-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-bottom: solid;
+}
+
+article .tweet-footer {
+  display: flex;
+  justify-content: right;
+  margin: 20px;
+}
+
+.article-hover {
+box-shadow: 5px 5px 5px #4056A1;
+}
+
+.icons-hover {
+color: orange;
+}

@@ -31,6 +31,9 @@
   <!-- New-tweet CSS -->
   <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
 
+  <!-- Tweet element CSS-->
+  <link rel="stylesheet" href="/styles/tweet-element.css" type="text/css" />
+
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -43,6 +46,9 @@
 
   <!-- Character Counter JS -->
   <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
+
+  <!-- Tweet State JS -->
+  <script type="text/javascript" src="/scripts/tweet-element.js"></script>
 
 </head>
 
@@ -57,7 +63,7 @@
   </nav>
 
   <!-- header -->
-  <header>
+  <header class="userIcon">
     <div>
       <img src="/images/profile-hex.png">
     </div>
@@ -69,6 +75,7 @@
 
   <!-- Page-specific (main) content here -->
   <main class="container">
+    <!-- form -->
     <section class="new-tweet">
       <form action="/tweets" method="POST">
         <label for="tweet-text">What are you humming about?</label>
@@ -78,6 +85,25 @@
           <output name="counter" class="counter" for="tweet-text">140</output>
         </div>
       </form>
+    </section>
+    <!-- Tweet element -->
+    <section class="tweet-element">
+      <article>
+        <header class="tweet-header">
+          <p>Headers</p>
+        </header>
+    
+        <footer class="tweet-footer">
+          <div class="tweet-icons">
+            <!-- <button class="fa-solid fa-flag fa-2xs" type="submit"></button>
+            <button class="fa-solid fa-retweet fa-2xs" type="submit"></button>
+            <button class="fa-solid fa-heart fa-2xs" type="submit"></button> -->
+            <i id="flag" class="fa-solid fa-flag fa-2xs"></i>
+            <i id="retweet" class="fa-solid fa-retweet fa-2xs"></i>
+            <i id="heart" class="fa-solid fa-heart fa-2xs"></i>
+          </div>
+        </footer>
+      </article>
     </section>
   </main>
 
