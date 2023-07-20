@@ -4,35 +4,10 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-// Test / driver code (temporary). Eventually will get this from the server.
-const tweetData = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd"
-    },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-];
 
 // create tweet html structure for page 
 const createTweetElement = tweetData => {
+  const formattedDate = timeago.format(tweetData.created_at); // formats time to days
   const html = `
 <article>
   <header class="tweet-header">
@@ -46,11 +21,11 @@ const createTweetElement = tweetData => {
   <p>${tweetData.content.text}</p>
 
   <footer class="tweet-footer">
-    ${tweetData.created_at}
+    ${formattedDate}
     <div class="tweet-icons">
-      <i id="flag" class="fa-solid fa-flag fa-2xs"></i>
-      <i id="retweet" class="fa-solid fa-retweet fa-2xs"></i>
-      <i id="heart" class="fa-solid fa-heart fa-2xs"></i>
+      <i id="flag" class="fa-solid fa-flag fa-1xs"></i>
+      <i id="retweet" class="fa-solid fa-retweet fa-1xs"></i>
+      <i id="heart" class="fa-solid fa-heart fa-1xs"></i>
     </div>
   </footer>
   
@@ -76,8 +51,6 @@ const renderTweets = (tweetDataArray) => {
 
 // waits for document to fully load before running
 $(document).ready(() => {
-  renderTweets(tweetData)
-
   // prevents normal form submit
   $("form").on("submit", event => {
     event.preventDefault()
@@ -92,6 +65,11 @@ $(document).ready(() => {
     }).then(res => {
       createTweetElement(res)
     })
+  })
+
+  // get tweets from server
+  $.get("http://localhost:8080/tweets").then(res => {
+    renderTweets(res);
   })
 
 });
