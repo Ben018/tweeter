@@ -10,9 +10,21 @@ article .tweet-header {
   justify-content: space-between;
 }
 
-article .tweet-header-right {
+article .tweet-header-left {
   display: flex;
   align-items: center;
+}
+
+article #flag {
+  padding: 5px;
+}
+
+article #retweet {
+  padding: 5px;
+}
+
+article #like {
+  padding: 5px;
 }
 
 /* body */

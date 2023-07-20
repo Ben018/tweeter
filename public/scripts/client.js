@@ -6,44 +6,80 @@
 
 
 // create tweet html structure for page 
+// const createTweetElement = tweetData => {
+//   const formattedDate = timeago.format(tweetData.created_at); // formats time to days
+//   const html = `
+// <article>
+//   <header class="tweet-header">
+//   <div class="tweet-header-right">
+//     <img style="margin: auto; background-color: transparent;" src="${tweetData.user.avatars}" alt="">
+//     ${tweetData.user.name}
+//   </div>
+//   ${tweetData.user.handle}
+//   </header>
+
+//   <p>${tweetData.content.text}</p>
+
+//   <footer class="tweet-footer">
+//     ${formattedDate}
+//     <div class="tweet-icons">
+//       <i id="flag" class="fa-solid fa-flag fa-1xs"></i>
+//       <i id="retweet" class="fa-solid fa-retweet fa-1xs"></i>
+//       <i id="heart" class="fa-solid fa-heart fa-1xs"></i>
+//     </div>
+//   </footer>
+
+// </article>
+// `
+//   return html;
+// };
+
+// create tweet html structure for page 
 const createTweetElement = tweetData => {
-  const formattedDate = timeago.format(tweetData.created_at); // formats time to days
-  const html = `
-<article>
-  <header class="tweet-header">
-  <div class="tweet-header-right">
-    <img style="margin: auto; background-color: transparent;" src="${tweetData.user.avatars}" alt="">
-    ${tweetData.user.name}
-  </div>
-  ${tweetData.user.handle}
-  </header>
+  const { user: { name, avatars, handle }, content: { text }, created_at } = tweetData;
 
-  <p>${tweetData.content.text}</p>
+  const formattedDate = timeago.format(created_at); // formats time to days
+  const $article = $("<article>");
+  const $header = $("<header>").addClass("tweet-header");
+  const $headerLeft = $("<div>").addClass("tweet-header-left");
+  const $headerRight = $("<div>");
+  const $body = $("<p>");
+  const $footer = $("<footer>").addClass("tweet-footer");
+  const $icons = $("<div>").addClass("tweet-icons");
+  const $flagIcon = $("<i>").attr({ id: "flag", class: "fa-solid fa-flag fa-1xs" });
+  const $retweetIcon = $("<i>").attr({ id: "retweet", class: "fa-solid fa-retweet fa-1xs" });
+  const $heartIcon = $("<i>").attr({ id: "heart", class: "fa-solid fa-heart fa-1xs" });
 
-  <footer class="tweet-footer">
-    ${formattedDate}
-    <div class="tweet-icons">
-      <i id="flag" class="fa-solid fa-flag fa-1xs"></i>
-      <i id="retweet" class="fa-solid fa-retweet fa-1xs"></i>
-      <i id="heart" class="fa-solid fa-heart fa-1xs"></i>
-    </div>
-  </footer>
+  $headerRight.text(handle);
+  $body.text(text);
+  $footer.text(formattedDate);
+
+  $article.append($header);
   
-</article>
-`
+  $header.append($headerLeft);
+  $headerLeft.append($("<img>").attr({ style: "margin: auto; background-color: transparent;", src: avatars, alt: "" }), name);
+  $header.append($headerRight);
+  
+  $article.append($body);
+  $article.append($footer);
+  $footer.append($icons);
 
-  return html
+  $icons.append($flagIcon);
+  $icons.append($retweetIcon);
+  $icons.append($heartIcon);
+
+  return $article;
 };
 
 // add one tweet to page
 const renderTweetsPostOne = (tweetData) => {
     const tweet = createTweetElement(tweetData)
-    $("main").append(tweet)
+  $(".tweet-element").prepend(tweet)
 };
 
 // add many tweets to page
 const renderTweets = (tweetDataArray) => {
-  for (const tweetData of tweetDataArray) {
+  for (const tweetData of tweetDataArray.reverse()) {
     const tweet = createTweetElement(tweetData)
     $("main").append(tweet)
   }
@@ -62,6 +98,33 @@ function checkCharacterLimit() {
   return true; // allow form submission
 }
 
+// loads tweets
+const loadTweets = function() {
+  $.get("/tweets").then(res => {
+    renderTweets(res);
+  });
+};
+
+// loads the most recent tweet post
+const loadRecentTweet = function () {
+  $.get("/tweets").then(res => {
+      const latestTweet = res[res.length - 1]; // Get the lastest tweet from the array
+    console.log(latestTweet)
+      renderTweetsPostOne(latestTweet);
+  });
+};
+
+// post a tweet to server
+const postTweet = function () {
+  $.ajax({
+    method: "POST",
+    url: "/tweets",
+    data: serializedString
+  }).then(res => {
+    createTweetElement(res);
+  });
+};
+
 // waits for document to fully load before running
 $(document).ready(() => {
   // prevents normal form submit
@@ -71,22 +134,22 @@ $(document).ready(() => {
 
     // if tweet text box is not > 140
     if (isTextValid) {
-      // use ajax to prevent page refresh
+      // serialized tweet data
       const serializedString = $(event.currentTarget).serialize();
-      
+      $("#tweet-text").val(""); // clear text area
+
+      // use ajax to prevent page refresh
       $.ajax({
         method: "POST",
-        url: "http://localhost:8080/tweets",
+        url: "/tweets",
         data: serializedString
       }).then(res => {
-        createTweetElement(res)
-      })
+        createTweetElement(res, loadRecentTweet());
+      });
     }
-  })
+  });
 
-  // get tweets from server
-  $.get("http://localhost:8080/tweets").then(res => {
-    renderTweets(res);
-  })
+  // get initial tweets from server
+  loadTweets();
 
 });
