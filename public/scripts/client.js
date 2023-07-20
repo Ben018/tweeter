@@ -4,36 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-
-// create tweet html structure for page 
-// const createTweetElement = tweetData => {
-//   const formattedDate = timeago.format(tweetData.created_at); // formats time to days
-//   const html = `
-// <article>
-//   <header class="tweet-header">
-//   <div class="tweet-header-right">
-//     <img style="margin: auto; background-color: transparent;" src="${tweetData.user.avatars}" alt="">
-//     ${tweetData.user.name}
-//   </div>
-//   ${tweetData.user.handle}
-//   </header>
-
-//   <p>${tweetData.content.text}</p>
-
-//   <footer class="tweet-footer">
-//     ${formattedDate}
-//     <div class="tweet-icons">
-//       <i id="flag" class="fa-solid fa-flag fa-1xs"></i>
-//       <i id="retweet" class="fa-solid fa-retweet fa-1xs"></i>
-//       <i id="heart" class="fa-solid fa-heart fa-1xs"></i>
-//     </div>
-//   </footer>
-
-// </article>
-// `
-//   return html;
-// };
-
 // create tweet html structure for page 
 const createTweetElement = tweetData => {
   const { user: { name, avatars, handle }, content: { text }, created_at } = tweetData;
@@ -68,6 +38,9 @@ const createTweetElement = tweetData => {
   $icons.append($retweetIcon);
   $icons.append($heartIcon);
 
+  //adds event listener
+  eventListener();
+
   return $article;
 };
 
@@ -101,7 +74,7 @@ function checkCharacterLimit() {
 // loads tweets
 const loadTweets = function() {
   $.get("/tweets").then(res => {
-    renderTweets(res);
+    renderTweets(res,);
   });
 };
 
