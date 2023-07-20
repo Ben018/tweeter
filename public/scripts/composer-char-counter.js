@@ -1,3 +1,4 @@
+// text counter for tweet form
 let i = 140
 
 $(document).ready(function () {

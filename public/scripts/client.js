@@ -49,22 +49,39 @@ const renderTweets = (tweetDataArray) => {
   }
 };
 
+// check to see if tweet from form eceeds 140 limit
+function checkCharacterLimit() {
+  const tweetTextarea = document.getElementById('tweet-text');
+  const maxLength = 140;
+  const remainingChars = maxLength - tweetTextarea.value.length;
+
+  if (remainingChars < 0) {
+    alert("Tweet exceeds 140 limit");
+    return false; // deny form submission
+  }
+  return true; // allow form submission
+}
+
 // waits for document to fully load before running
 $(document).ready(() => {
   // prevents normal form submit
   $("form").on("submit", event => {
     event.preventDefault()
+    const isTextValid = checkCharacterLimit();
 
-    // use ajax to prevent page refresh
-    const serializedString = $(event.currentTarget).serialize();
-
-    $.ajax({
-      method: "POST",
-      url: "http://localhost:8080/tweets",
-      data: serializedString
-    }).then(res => {
-      createTweetElement(res)
-    })
+    // if tweet text box is not > 140
+    if (isTextValid) {
+      // use ajax to prevent page refresh
+      const serializedString = $(event.currentTarget).serialize();
+      
+      $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/tweets",
+        data: serializedString
+      }).then(res => {
+        createTweetElement(res)
+      })
+    }
   })
 
   // get tweets from server
