@@ -48,3 +48,10 @@ article .tweet-footer {
 .icons-hover {
   color: orange;
 }
+
+#error {
+  display: flex;
+  justify-content: center;
+  border: solid;
+  color: red;
+}

@@ -30,5 +30,11 @@ $(document).ready(function () {
     $(event.currentTarget).removeClass('icons-hover');
   });
 
+  //clicking anywhere on the body will toggle the errorMsg back up 
+  $('#tweet-text').on('click', function () {
+    $('#error').slideUp().text('');
+
+  });
+
 });
 };

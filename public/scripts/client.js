@@ -60,15 +60,20 @@ const renderTweets = (tweetDataArray) => {
 
 // check to see if tweet from form eceeds 140 limit
 function checkCharacterLimit() {
+  let error;
   const tweetTextarea = document.getElementById('tweet-text');
   const maxLength = 140;
   const remainingChars = maxLength - tweetTextarea.value.length;
 
-  if (remainingChars < 0) {
-    alert("Tweet exceeds 140 limit");
-    return false; // deny form submission
+  // if no text
+  if (remainingChars === maxLength) {
+    error = "Tweet is empty";
   }
-  return true; // allow form submission
+  // if over 140 characters
+  if (remainingChars < 0) {
+    error = "Over 140 character limit";
+  }
+  return error;
 }
 
 // loads tweets
@@ -89,37 +94,39 @@ const loadRecentTweet = function () {
 
 // post a tweet to server
 const postTweet = function () {
+  $('#error').hide()
   $.ajax({
     method: "POST",
     url: "/tweets",
     data: serializedString
   }).then(res => {
-    createTweetElement(res);
+    createTweetElement(res, loadRecentTweet());
   });
 };
 
 // waits for document to fully load before running
 $(document).ready(() => {
+  $('#error').hide()
   // prevents normal form submit
   $("form").on("submit", event => {
     event.preventDefault()
-    const isTextValid = checkCharacterLimit();
+    let isTextValid = checkCharacterLimit();
+    // serialized tweet data
+    const serializedString = $(event.currentTarget).serialize();
 
     // if tweet text box is not > 140
-    if (isTextValid) {
-      // serialized tweet data
-      const serializedString = $(event.currentTarget).serialize();
-      $("#tweet-text").val(""); // clear text area
-
-      // use ajax to prevent page refresh
-      $.ajax({
-        method: "POST",
-        url: "/tweets",
-        data: serializedString
-      }).then(res => {
-        createTweetElement(res, loadRecentTweet());
-      });
+    if (error) {
+      $('#error').slideDown().text(isTextValid);
     }
+    // use ajax to prevent page refresh
+    $.ajax({
+      method: "POST",
+      url: "/tweets",
+      data: serializedString
+    }).then(res => {
+      createTweetElement(res, loadRecentTweet());
+    });
+    $("#tweet-text").val(""); // clear text area
   });
 
   // get initial tweets from server
