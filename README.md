@@ -1,3 +1,8 @@
+# Screenshots
+
+!["Desktop View"](https://github.com/Ben018/tweeter/blob/master/docs/main-desktop.png)
+!["Mobile View"](https://github.com/Ben018/tweeter/blob/master/docs/main-mobile.png)
+
 # Tweeter Project
 
 Tweeter is a simple, single-page Twitter clone.
