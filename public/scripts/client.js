@@ -25,11 +25,11 @@ const createTweetElement = tweetData => {
   $footer.text(formattedDate);
 
   $article.append($header);
-  
+
   $header.append($headerLeft);
   $headerLeft.append($("<img>").attr({ style: "margin: auto; background-color: transparent;", src: avatars, alt: "" }), name);
   $header.append($headerRight);
-  
+
   $article.append($body);
   $article.append($footer);
   $footer.append($icons);
@@ -46,15 +46,15 @@ const createTweetElement = tweetData => {
 
 // add one tweet to page
 const renderTweetsPostOne = (tweetData) => {
-    const tweet = createTweetElement(tweetData)
-  $(".tweet-element").prepend(tweet)
+  const tweet = createTweetElement(tweetData);
+  $(".tweet-element").prepend(tweet);
 };
 
 // add many tweets to page
 const renderTweets = (tweetDataArray) => {
   for (const tweetData of tweetDataArray.reverse()) {
-    const tweet = createTweetElement(tweetData)
-    $("main").append(tweet)
+    const tweet = createTweetElement(tweetData);
+    $("main").append(tweet);
   }
 };
 
@@ -74,10 +74,10 @@ function checkCharacterLimit() {
     error = "Over 140 character limit";
   }
   return error;
-}
+};
 
 // loads tweets
-const loadTweets = function() {
+const loadTweets = function () {
   $.get("/tweets").then(res => {
     renderTweets(res,);
   });
@@ -86,9 +86,9 @@ const loadTweets = function() {
 // loads the most recent tweet post
 const loadRecentTweet = function () {
   $.get("/tweets").then(res => {
-      const latestTweet = res[res.length - 1]; // Get the lastest tweet from the array
-    console.log(latestTweet)
-      renderTweetsPostOne(latestTweet);
+    const latestTweet = res[res.length - 1]; // Get the lastest tweet from the array
+    $("#tweet-text").val(""); // clear text area
+    renderTweetsPostOne(latestTweet);
   });
 };
 
@@ -106,6 +106,10 @@ const postTweet = function () {
 
 // waits for document to fully load before running
 $(document).ready(() => {
+  const tweetTextarea = document.getElementById('tweet-text');
+  const maxLength = 140;
+  const remainingChars = maxLength - tweetTextarea.value.length;
+  // hide error on load
   $('#error').hide()
   // prevents normal form submit
   $("form").on("submit", event => {
@@ -126,10 +130,10 @@ $(document).ready(() => {
     }).then(res => {
       createTweetElement(res, loadRecentTweet());
     });
-    $("#tweet-text").val(""); // clear text area
+
   });
 
   // get initial tweets from server
   loadTweets();
-
+  
 });

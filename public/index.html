@@ -4,55 +4,40 @@
 <head>
   <!-- Meta Information -->
   <title>Tweeter - Home Page</title>
-
   <!-- External CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     type="text/css" />
-
   <!-- font Bungee Source Sans 3 300 & 600 Italic-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
-
   <!-- font-awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
   <!-- Nav CSS -->
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-
   <!-- Header CSS -->
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-
   <!-- New-tweet CSS -->
   <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
-
   <!-- Tweet element CSS-->
   <link rel="stylesheet" href="/styles/tweet-element.css" type="text/css" />
-
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
   <!-- App JS -->
   <script type="text/javascript" src="/scripts/client.js"></script>
-  
   <!-- Jquery -->
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
     crossorigin="anonymous"></script>
-
   <!-- timeago -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js" integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
   <!-- Character Counter JS -->
   <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
-
   <!-- Tweet State JS -->
   <script type="text/javascript" src="/scripts/tweet-element.js"></script>
-
   <!-- Client JS -->
   <script type="text/javascript" src="/scripts/client.js"></script>
 
@@ -60,7 +45,7 @@
 
 <body>
   <!-- Top nav bar (fixed) -->
-  <nav>
+  <nav class="navBar">
     <span>tweeter</span>
     <div class="tweet">
       Write a new tweet
@@ -68,10 +53,11 @@
     </div>
   </nav>
 
+  <div class="fullscreenLayout">
   <!-- header -->
   <header class="userIcon">
     <div>
-      <img src="/images/profile-hex.png">
+      <img class="userImage" src="/images/profile-hex.png">
     </div>
     <br>
     <div>
@@ -99,7 +85,7 @@
      
     </section>
   </main>
-
+</div>
   </body>
   
   </html>

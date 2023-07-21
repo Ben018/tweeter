@@ -49,6 +49,7 @@ article .tweet-footer {
   color: orange;
 }
 
+/* error message for tweet input */
 #error {
   display: flex;
   justify-content: center;

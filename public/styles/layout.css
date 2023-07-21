@@ -3,24 +3,26 @@
  * https://css-tricks.com/international-box-sizing-awareness-day/
  * Do not modify these two selectors, please
  */
+ 
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
+
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
-/*
- * Global layout stuff
- */
- 
+/* Global layout stuff */
+
 body {
-   color: #545149;
-   background-color: #f4f1ec;
-   font-family: 'Source Sans 3', sans-serif;
-   font-size: 24px;
- }
- 
+  color: #545149;
+  background-color: #f4f1ec;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 24px;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -29,6 +31,37 @@ main {
   padding-right: 0.95em;
 }
 
-/*
- * Additional CSS can be defined below or in other CSS files, as per instructions
- */
+/* destop size */
+@media screen and (min-width: 1024px) {
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .fullscreenLayout {
+    display: flex;
+    flex-direction: row;
+  }
+
+  header.userIcon {
+    background-color: orange;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+    height: 510px;
+    width: 40%;
+    padding-top: 4em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navBar {
+    background-color: #4056A1;
+    color: #FFFFFF;
+  }
+
+  .container {
+    width: 60%;
+  }
+
+}
