@@ -1,4 +1,4 @@
-
+/* navigation bar */
 nav {
   position: relative;
   width: 100%;
@@ -12,11 +12,13 @@ nav {
   align-items: center;
 }
 
+/* tweeter title */
 span {
   font-family: 'Bungee', sans-serif;
   font-size: 25pt;
 }
 
+/* "wrtie a new tweet" icon */
 .tweet {
   display: flex;
   flex-direction: column;

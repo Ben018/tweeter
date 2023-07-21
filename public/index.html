@@ -33,7 +33,9 @@
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
     crossorigin="anonymous"></script>
   <!-- timeago -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js" integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"
+    integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Character Counter JS -->
   <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
   <!-- Tweet State JS -->
@@ -54,38 +56,38 @@
   </nav>
 
   <div class="fullscreenLayout">
-  <!-- header -->
-  <header class="userIcon">
-    <div>
-      <img class="userImage" src="/images/profile-hex.png">
-    </div>
-    <br>
-    <div>
-      <h2>Your Name</h2>
-    </div>
-  </header>
+    <!-- header -->
+    <header class="userIcon">
+      <div>
+        <img class="userImage" src="/images/profile-hex.png">
+      </div>
+      <br>
+      <div>
+        <h2>Your Name</h2>
+      </div>
+    </header>
 
-  <!-- Page-specific (main) content here -->
-  <main class="container">
-    <!-- form -->
-    <section class="new-tweet">
-      <p id="error"></p>
-      <form id="form" action="/tweets" method="POST">
-        <label for="tweet-text">What are you humming about?</label>
-        <textarea name="text" id="tweet-text" rows="2" cols="100%"></textarea>
-        <div class="tweetButton">
-          <button class="submitButton" type="submit">Tweet</button>
-          <output name="counter" class="counter" for="tweet-text">140</output>
-        </div>
-      </form>
-      <div id="error-message"></div>
-    </section>
-    <!-- Tweet element -->
-    <section class="tweet-element">
-     
-    </section>
-  </main>
-</div>
-  </body>
-  
-  </html>
+    <!-- Page-specific (main) content here -->
+    <main class="container">
+      <!-- form -->
+      <section class="new-tweet">
+        <p id="error"></p>
+        <form id="form" action="/tweets" method="POST">
+          <label for="tweet-text">What are you humming about?</label>
+          <textarea name="text" id="tweet-text" rows="2" cols="100%"></textarea>
+          <div class="tweetButton">
+            <button class="submitButton" type="submit">Tweet</button>
+            <output name="counter" class="counter" for="tweet-text">140</output>
+          </div>
+        </form>
+        <div id="error-message"></div>
+      </section>
+      <!-- Tweet element -->
+      <section class="tweet-element">
+
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>

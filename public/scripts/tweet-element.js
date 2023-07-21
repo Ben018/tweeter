@@ -1,4 +1,4 @@
-
+// function for event listeners
 const eventListener = function () {
 
   // Shadow box for tweet articles
@@ -30,7 +30,7 @@ const eventListener = function () {
       $(event.currentTarget).removeClass('icons-hover');
     });
 
-    //clicking anywhere on the body will toggle the errorMsg back up 
+    //click body to close error message
     $('#tweet-text').on('click', function () {
       $('#error').slideUp().text('');
 

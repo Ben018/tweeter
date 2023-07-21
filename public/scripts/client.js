@@ -4,7 +4,7 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-// create tweet html structure for page 
+// create tweet DOM structure for page 
 const createTweetElement = tweetData => {
   const { user: { name, avatars, handle }, content: { text }, created_at } = tweetData;
 
@@ -66,7 +66,7 @@ function checkCharacterLimit() {
   const remainingChars = maxLength - tweetTextarea.value.length;
 
   // if no text
-  if (remainingChars === maxLength) {
+  if (remainingChars === 140) {
     error = "Tweet is empty";
   }
   // if over 140 characters
@@ -92,36 +92,29 @@ const loadRecentTweet = function () {
   });
 };
 
-// post a tweet to server
-const postTweet = function () {
-  $('#error').hide()
-  $.ajax({
-    method: "POST",
-    url: "/tweets",
-    data: serializedString
-  }).then(res => {
-    createTweetElement(res, loadRecentTweet());
-  });
-};
-
 // waits for document to fully load before running
 $(document).ready(() => {
-  const tweetTextarea = document.getElementById('tweet-text');
-  const maxLength = 140;
-  const remainingChars = maxLength - tweetTextarea.value.length;
   // hide error on load
-  $('#error').hide()
+  $('#error').hide();
+
   // prevents normal form submit
   $("form").on("submit", event => {
-    event.preventDefault()
-    let isTextValid = checkCharacterLimit();
+    event.preventDefault();
+
+    const tweetTextarea = document.getElementById('tweet-text');
+    const isTextValid = checkCharacterLimit();
+
+    // if tweet text box is not > 140
+    if (isTextValid) {
+      $('#error').slideDown().text(isTextValid);
+      return; // stop if there is an error
+    } else {
+      $('#error').slideUp().text(''); // hide the error if valid
+    }
+
     // serialized tweet data
     const serializedString = $(event.currentTarget).serialize();
 
-    // if tweet text box is not > 140
-    if (error) {
-      $('#error').slideDown().text(isTextValid);
-    }
     // use ajax to prevent page refresh
     $.ajax({
       method: "POST",
@@ -131,9 +124,10 @@ $(document).ready(() => {
       createTweetElement(res, loadRecentTweet());
     });
 
+    // clear the tweet text area after post
+    tweetTextarea.value = '';
   });
 
   // get initial tweets from server
   loadTweets();
-  
 });
